@@ -56,6 +56,11 @@ variable "security_groups" {
     default     = []
 }
 
+variable "default_security_groups" {
+    description = "Whether default security groups should be applied"
+    default     = true
+}
+
 variable "user_data" {
     description = "User data script for all instances"
     default     = ""

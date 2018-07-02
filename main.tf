@@ -13,7 +13,7 @@ resource "aws_instance" "data_node" {
     key_name                    = "${var.key_name}"
     user_data                   = "${var.user_data == "" ? file("${path.module}/files/init.sh") : var.user_data }"
     ebs_optimized               = true
-    vpc_security_group_ids      = ["${concat(list(aws_security_group.influx_cluster.id, aws_security_group.data_node.id), var.security_groups)}"]
+    vpc_security_group_ids      = ["${var.default_security_groups == true ? concat(list(aws_security_group.influx_cluster.id, aws_security_group.data_node.id), var.security_groups) : var.security_groups}"]
     count                       = "${var.data_instances}"
 }
 
